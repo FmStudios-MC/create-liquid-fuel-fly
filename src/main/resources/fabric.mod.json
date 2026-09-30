@@ -17,6 +17,7 @@
     "issues": "https://github.com/FmStudios-MC/create-liquid-fuel-fly/issues"
   },
   "license": "MIT",
+  "icon": "assets/createliquidfuel/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
