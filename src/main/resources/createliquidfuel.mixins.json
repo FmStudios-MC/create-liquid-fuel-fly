@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "package": "com.forsteri.createliquidfuel.mixin",
+    "compatibilityLevel": "JAVA_25",
+    "mixins": [
+        "BlazeBurnerAccessor",
+        "BlazeBurnerBlockEntityMixin",
+        "BlazeBurnerBlockMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

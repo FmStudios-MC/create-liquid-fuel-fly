@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "createliquidfuel",
+  "version": "${version}",
+  "name": "Create Liquid Fuel (Fly Port)",
+  "description": "Unofficial Fabric / Minecraft 26.2 port of Create Liquid Fuel by Forsteri: pump lava and other liquid fuels into blaze burners with pipes. Built on ZurrTum's Create Fly. Not made, maintained or supported by Forsteri.",
+  "authors": [
+    "Forsteri"
+  ],
+  "contributors": [
+    "FabiMvurice Interactive (Fabric / 26.2 port)",
+    "ZurrTum (Create Fly)"
+  ],
+  "contact": {
+    "homepage": "https://github.com/FmStudios-MC/create-liquid-fuel-fly",
+    "sources": "https://github.com/FmStudios-MC/create-liquid-fuel-fly",
+    "issues": "https://github.com/FmStudios-MC/create-liquid-fuel-fly/issues"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.forsteri.createliquidfuel.CreateLiquidFuel"
+    ],
+    "client": [
+      "com.forsteri.createliquidfuel.CreateLiquidFuelClient"
+    ]
+  },
+  "mixins": [
+    "createliquidfuel.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": ">=26.2- <26.3-",
+    "java": ">=25",
+    "fabric-api": "*",
+    "create": "${create_fly_version_range}"
+  }
+}

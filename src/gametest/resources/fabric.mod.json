@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "createliquidfuel_gametest",
+  "version": "1.0.0",
+  "name": "Create Liquid Fuel checks",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-client-gametest": [
+      "com.forsteri.createliquidfuel.gametest.BurnerCheck"
+    ]
+  },
+  "depends": {
+    "createliquidfuel": "*"
+  }
+}

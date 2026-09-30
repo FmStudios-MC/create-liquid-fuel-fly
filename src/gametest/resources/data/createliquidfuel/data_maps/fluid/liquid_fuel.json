@@ -1,0 +1,9 @@
+{
+  "values": {
+    "minecraft:water": { "superHeat": true },
+    "create:chocolate": {
+      "neoforge:conditions": [ { "type": "neoforge:mod_loaded", "modid": "no_such_mod" } ],
+      "neoforge:value": { "burnTime": 5 }
+    }
+  }
+}

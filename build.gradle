@@ -1,0 +1,102 @@
+plugins {
+    id "net.fabricmc.fabric-loom" version "${loom_version}"
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+loom {
+    mods {
+        "createliquidfuel" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "Fabric"
+        url = "https://maven.fabricmc.net/"
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    // MC 26.x ships unobfuscated (Mojang names), so there is no remapping and no mod* configurations.
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // The fabric-api artifact only nests the module jars, so each module used must be named.
+    implementation fabricApi.module("fabric-api-base", project.fabric_version)
+    implementation fabricApi.module("fabric-api-lookup-api-v1", project.fabric_version)
+    implementation fabricApi.module("fabric-lifecycle-events-v1", project.fabric_version)
+    implementation fabricApi.module("fabric-networking-api-v1", project.fabric_version)
+    implementation fabricApi.module("fabric-resource-loader-v1", project.fabric_version)
+    implementation fabricApi.module("fabric-transfer-api-v1", project.fabric_version)
+    runtimeOnly "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    implementation "maven.modrinth:create-fly:${project.create_fly_version}"
+}
+
+processResources {
+    filteringCharset = 'UTF-8'
+
+    def props = [
+            version                 : project.version,
+            loader_version          : project.loader_version,
+            create_fly_version_range: project.create_fly_version_range,
+    ]
+    inputs.properties props
+
+    filesMatching("fabric.mod.json") {
+        expand props
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = 'UTF-8'
+    it.options.release = 25
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archives_base_name}" }
+    }
+}
+
+// Automated in-game check: ./gradlew runClientGameTest builds burner setups, lets them run and
+// logs CLF-TEST PASS/FAIL lines. Not shipped.
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = "createliquidfuel_gametest"
+        enableGameTests = false
+        enableClientGameTests = true
+        eula = true
+    }
+}
+
+dependencies {
+    gametestImplementation fabricApi.module("fabric-client-gametest-api-v1", project.fabric_version)
+}

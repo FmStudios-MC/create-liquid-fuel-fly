@@ -1,0 +1,37 @@
+# Gradle
+.gradle/
+build/
+out/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Minecraft run directories (dev client/server, game tests)
+run/
+runs/
+logs/
+crash-reports/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+bin/
+.fleet/
+
+# Local porting helpers (scripts, class lists), not published
+tools/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local stuff that must not be published
+*.log
+local.properties
